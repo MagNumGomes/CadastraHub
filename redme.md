@@ -24,8 +24,8 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 
 | Projeto | Repositório |
 |---------|------------|
-| Backend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/blob/main/cadastrahub_back) |
-| Frontend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/blob/main/cadastrahub_front) |
+| Backend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_back) |
+| Frontend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_front) |
 
 ## 👥 Equipe
 
@@ -34,40 +34,3 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 | João Vítor Góes | [GitHub](https://github.com/MagNumGomes) | [LinkedIn](https://www.linkedin.com/in/joaovitorgoes/) |
 | Alexandre de Souza | [GitHub](https://github.com/AlexandreFatec) | [LinkedIn]() |
 | Breno Augusto | [GitHub](https://github.com/brenoasj) | [LinkedIn]() |
-
-## 📖 Manual de Uso
-
-### 1️⃣ Clone os repositórios
-```bash
-# Clone o backend
-git clone <URL_DO_BACKEND>
-
-# Clone o frontend
-git clone <URL_DO_FRONTEND>
-```
-
-### 2️⃣ Configure o banco de dados
-Crie um arquivo `.env` no backend com a seguinte estrutura:
-```env
-DATABASE_URL="mysql://usuario:senha@localhost:3306/nome_do_banco"
-```
-
-### 3️⃣ Instale as dependências e execute
-```bash
-# Backend
-cd backend
-npm install
-npm run dev
-
-# Frontend
-cd frontend
-npm install
-npm start
-```
-
-🔗 **A aplicação estará rodando em:**
-
-| Serviço | URL |
-|---------|-----|
-| Frontend | `http://localhost:3000` |
-| Backend | `http://localhost:3001` |
