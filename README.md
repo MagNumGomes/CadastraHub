@@ -10,7 +10,7 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 
 | Backend | Frontend | Banco de Dados | Outras Tecnologias |
 |---------|---------|---------------|-------------------|
-| Node.js, Express, ORM (Prisma/Sequelize) | Javascript | MySQL | JWT (Autenticação) |
+| Node.js, Express, ORM (Prisma) | Javascript | MySQL | JWT (Autenticação) |
 
 ## 🎯 MVP (Minimum Viable Product)
 
