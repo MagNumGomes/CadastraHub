@@ -10,7 +10,7 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 
 | Backend | Frontend | Banco de Dados | Outras Tecnologias |
 |---------|---------|---------------|-------------------|
-| Node.js, Express, ORM (Prisma/Sequelize) | Javascript | MySQL | JWT (Autenticação) |
+| Node.js, Express, ORM (Prisma) | Javascript | MySQL | JWT (Autenticação) |
 
 ## 🎯 MVP (Minimum Viable Product)
 
@@ -24,8 +24,8 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 
 | Projeto | Repositório |
 |---------|------------|
-| Backend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_back) |
-| Frontend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_front) |
+| Backend | [Link para o repositório](https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_back) |
+| Frontend | [Link para o repositório](https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_front) |
 
 ## 👥 Equipe
 
