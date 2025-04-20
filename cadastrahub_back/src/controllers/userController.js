@@ -36,6 +36,7 @@ const createUser = async (req, res) => {
   }
 };
 
+
 // Get all users (R) - using Prisma
 const getAllUsers = async (req, res) => {
   try {
