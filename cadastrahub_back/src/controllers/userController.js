@@ -2,7 +2,16 @@ const prisma = require('../dbConnector');
 
 // Create a new user (C)
 const createUser = async (req, res) => {
-  const { name, email } = req.body;
+  const {
+    name,
+    email,
+    password,
+    cpfCnpj,
+    address,
+    phone,
+    material,
+    category
+  } = req.body;
 
   try {
     // Creating a new user in the database
@@ -10,7 +19,13 @@ const createUser = async (req, res) => {
       data: {
         name,
         email,
-      },
+        password,
+        cpfCnpj,
+        address,
+        phone,
+        material,
+        category
+      }
     });
 
     // Responding with the created user
@@ -38,7 +53,17 @@ const getAllUsers = async (req, res) => {
 // Update an existing user (U)
 const updateUser = async (req, res) => {
   const { id } = req.params; // Get the user ID from the URL parameter
-  const { name, email } = req.body; // Get the name and email from the request body
+  
+  const {
+    name,
+    email,
+    password,
+    cpfCnpj,
+    address,
+    phone,
+    material,
+    category
+  } = req.body;
 
   try {
     // Check if the user exists by ID
@@ -53,7 +78,16 @@ const updateUser = async (req, res) => {
     // Update the user's data
     const updatedUser = await prisma.user.update({
       where: { id: Number(id) },
-      data: { name, email },
+      data: {
+        name,
+        email,
+        password,
+        cpfCnpj,
+        address,
+        phone,
+        material,
+        category
+      },
     });
 
     res.json({ message: 'User updated successfully', user: updatedUser });
