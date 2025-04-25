@@ -13,6 +13,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum CategoryType {
+  customer
+  supplier
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String
@@ -22,18 +32,28 @@ model User {
   address   String
   phone     String   @unique
   material  MaterialType
+  products   Product[]
   category  CategoryType
+  role      Role   @default(USER)
 }
 
-// Tipos personalizados (Enums)
 enum MaterialType {
-  A
-  B
-  C
-  D
+  ALUMINIO
+  COBRE
+  CHUMBO
+  MAGNESIO
+  NICKEL
+  INOX
+  LATAO
+  BRONZE
+  ZINCO
 }
 
-enum CategoryType {
-  customer
-  supplier
+model Product {
+  id              Int           @id @default(autoincrement())
+  name            String
+  type            MaterialType
+  quantity_tonelada Decimal
+  userId            Int
+  user              User          @relation(fields: [userId], references: [id])
 }

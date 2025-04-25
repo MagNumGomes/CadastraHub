@@ -35,12 +35,19 @@ const Register = () => {
   
       <select name="material" className="border w-full p-2 mb-2" onChange={handleChange}>
         <option value="">Selecione o tipo de material</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
+        <option value="ALUMINIO">ALUMINIO</option>
+        <option value="COBRE">COBRE</option>
+        <option value="CHUMBO">CHUMBO</option>
+        <option value="MAGNESIO">MAGNESIO</option><option value="ALUMINIO">ALUMINIO</option>
+        <option value="NICKEL">NICKEL</option>
+        <option value="INOX">INOX</option>
+        <option value="LATAO">LATAO</option>
+        <option value="BRONZE">BRONZE</option>
+        <option value="ZINCO">ZINCO</option>
       </select>
-  
+    
+      <input name="quantity" type="text" placeholder="Quantidade" className="border w-full p-2 mb-2" onChange={handleChange} />
+
       <select name="category" className="border w-full p-2 mb-4" onChange={handleChange}>
         <option value="">Selecione a categoria</option>
         <option value="customer">Cliente</option>

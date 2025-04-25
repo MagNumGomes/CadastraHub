@@ -2,6 +2,38 @@ const prisma = require('../dbConnector');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+/*const createAdminIfNeeded = async () => {
+  const existingAdmin = await prisma.user.findFirst({
+    where: { role: 'ADMIN' },
+  });
+
+  if (!existingAdmin) {
+    const hashedPassword = await bcrypt.hash('admin', 10); // Lembre-se de criptografar a senha
+
+    await prisma.user.create({
+      data: {
+        name: 'admin',
+        email: 'admin@example.com',
+        password: hashedPassword,
+        cpfCnpj: '1234',
+        address: 'rua',
+        phone: '1234',
+        material: 'CHUMBO',
+        category: 'customer',
+        role: 'ADMIN'
+      },
+    });
+
+    console.log('Admin default criado com sucesso!');
+  } else {
+    console.log('Admin já existe no banco de dados');
+  }
+};
+
+createAdminIfNeeded();
+*/
+
+
 // Create a new user (C)
 const createUser = async (req, res) => {
   const {
@@ -12,6 +44,7 @@ const createUser = async (req, res) => {
     address,
     phone,
     material,
+    //products,
     category
   } = req.body;
 
@@ -29,6 +62,9 @@ const createUser = async (req, res) => {
         address,
         phone,
         material,
+        /*products: {
+          create: products  // array de produtos com { name, type, quantity_tonelada }
+        },*/
         category
       }
     });
@@ -95,7 +131,6 @@ const getProfile = async (req, res) => {
       const user = await prisma.user.findUnique({
       where: { id: req.user.id },
       select: {
-        id: true,
         name: true,
         email: true,
       },
@@ -125,6 +160,7 @@ const updateUser = async (req, res) => {
     address,
     phone,
     material,
+    //products,
     category
   } = req.body;
 
@@ -155,6 +191,9 @@ const updateUser = async (req, res) => {
         address,
         phone,
         material,
+        /*products: {
+          create: products  // array de produtos com { name, type, quantity_tonelada }
+        },*/
         category
       },
     });
