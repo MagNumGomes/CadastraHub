@@ -31,8 +31,7 @@ model User {
   cpfCnpj   String   @unique
   address   String
   phone     String   @unique
-  material  MaterialType
-  products   Product[]
+  products  Product[]
   category  CategoryType
   role      Role   @default(USER)
 }
@@ -51,7 +50,6 @@ enum MaterialType {
 
 model Product {
   id              Int           @id @default(autoincrement())
-  name            String
   type            MaterialType
   quantity_tonelada Decimal
   userId            Int

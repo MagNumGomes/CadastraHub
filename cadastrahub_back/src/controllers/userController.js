@@ -2,38 +2,6 @@ const prisma = require('../dbConnector');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-/*const createAdminIfNeeded = async () => {
-  const existingAdmin = await prisma.user.findFirst({
-    where: { role: 'ADMIN' },
-  });
-
-  if (!existingAdmin) {
-    const hashedPassword = await bcrypt.hash('admin', 10); // Lembre-se de criptografar a senha
-
-    await prisma.user.create({
-      data: {
-        name: 'admin',
-        email: 'admin@example.com',
-        password: hashedPassword,
-        cpfCnpj: '1234',
-        address: 'rua',
-        phone: '1234',
-        material: 'CHUMBO',
-        category: 'customer',
-        role: 'ADMIN'
-      },
-    });
-
-    console.log('Admin default criado com sucesso!');
-  } else {
-    console.log('Admin já existe no banco de dados');
-  }
-};
-
-createAdminIfNeeded();
-*/
-
-
 // Create a new user (C)
 const createUser = async (req, res) => {
   const {
@@ -43,16 +11,13 @@ const createUser = async (req, res) => {
     cpfCnpj,
     address,
     phone,
-    material,
-    //products,
+    products,
     category
   } = req.body;
 
   try {
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Creating a new user in the database
     const newUser = await prisma.user.create({
       data: {
         name,
@@ -61,15 +26,13 @@ const createUser = async (req, res) => {
         cpfCnpj,
         address,
         phone,
-        material,
-        /*products: {
-          create: products  // array de produtos com { name, type, quantity_tonelada }
-        },*/
+        products: {
+          create: products
+        },
         category
       }
     });
 
-    // Responding with the created user
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     console.error('Create Error:', error);
@@ -112,7 +75,7 @@ const loginUser = async (req, res) => {
   }
 }; 
 
-// Get all users (R) - using Prisma
+// Get all users (R)
 const getAllUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany(); // Fetch all users from the database
@@ -131,6 +94,7 @@ const getProfile = async (req, res) => {
       const user = await prisma.user.findUnique({
       where: { id: req.user.id },
       select: {
+        id: true,
         name: true,
         email: true,
       },
@@ -159,8 +123,7 @@ const updateUser = async (req, res) => {
     cpfCnpj,
     address,
     phone,
-    material,
-    //products,
+    products,
     category
   } = req.body;
 
@@ -190,10 +153,9 @@ const updateUser = async (req, res) => {
         cpfCnpj,
         address,
         phone,
-        material,
-        /*products: {
+        products: {
           create: products  // array de produtos com { name, type, quantity_tonelada }
-        },*/
+        },
         category
       },
     });

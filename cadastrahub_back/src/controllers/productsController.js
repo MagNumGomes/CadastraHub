@@ -1,26 +1,43 @@
-/*const prisma = require('../dbConnector');  // Certifique-se de que o prisma está corretamente configurado
+const prisma = require('../dbConnector');  // Certifique-se de que o prisma está corretamente configurado
 
 // Criar um novo produto (C)
 const createProduct = async (req, res) => {
-  const { name, type, quantity_tonelada, userId } = req.body;
+  const userId = parseInt(req.params.id); // Obtendo o ID do usuário da URL
+  const { type, quantity_tonelada } = req.body;
 
   try {
-    const newProduct = await prisma.product.create({
+    const product = await prisma.product.create({
       data: {
-        name,
         type,
         quantity_tonelada,
         userId
       }
     });
 
-    res.status(201).json({ message: 'Produto criado com sucesso', product: newProduct });
+    res.status(201).json({ message: 'Produto adicionado com sucesso', product });
   } catch (error) {
     console.error('Erro ao criar produto:', error);
-    res.status(500).json({ error: 'Falha ao criar produto' });
+    res.status(500).json({ error: 'Falha ao adicionar produto' });
+  }
+};
+
+
+const getUserProducts = async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  try {
+    const products = await prisma.product.findMany({
+      where: { userId }
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Erro ao buscar produtos:', error);
+    res.status(500).json({ error: 'Falha ao buscar produtos' });
   }
 };
 
 module.exports = {
-  createProduct
-};*/
+  createProduct,
+  getUserProducts
+};
