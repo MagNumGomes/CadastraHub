@@ -10,6 +10,9 @@ const Profile = () => {
     const [quantity, setQuantity] = useState('');
     const navigate = useNavigate();
 
+    const [userProducts, setUserProducts] = useState([]);
+    const [showProducts, setShowProducts] = useState(false);
+
     // Carregar perfil do usuário
     useEffect(() => {
         const fetchProfile = async () => {
@@ -69,6 +72,28 @@ const Profile = () => {
     };
     console.log(`POST para /api/users/${user?.id}/products`);
 
+    // Função para buscar os produtos do usuário
+    const handleFetchProducts = async () => {
+        if (!showProducts && userProducts.length === 0) {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:3001/api/users/${user.id}/products`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+    
+                setUserProducts(response.data);
+            } catch (err) {
+                console.error('Erro ao buscar produtos:', err);
+            }
+        }
+    
+        // Alternar visibilidade
+        setShowProducts(!showProducts);
+    };
+    
+
     if (error) return <p>{error}</p>;
     if (!user) return <p>Carregando...</p>;
 
@@ -78,9 +103,6 @@ const Profile = () => {
             
             <p><strong>Nome:</strong> {user.name}</p>
             <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Endereço:</strong> {user.address}</p>
-            <p><strong>Telefone:</strong> {user.phone}</p>
-            
 
             <button
                 onClick={handleLogout}
@@ -88,6 +110,32 @@ const Profile = () => {
             >
                 Logout
             </button>
+
+<button
+    onClick={handleFetchProducts}
+    className="bg-purple-600 text-white px-4 py-2 rounded"
+>
+    {showProducts ? 'Esconder Produtos' : 'Ver Meus Produtos'}
+</button>
+
+            {/* Exibir os produtos do usuário */}
+            {showProducts && userProducts.length > 0 && (
+                <div className="mt-4">
+                    <h2 className="text-lg font-bold mb-2">Meus Produtos</h2>
+                    <ul>
+                        {userProducts.map((product) => (
+                            <li key={product.id}>
+                                <strong>Tipo:</strong> {product.type} | <strong>Quantidade:</strong> {product.quantity_tonelada} TON
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {/* Caso não tenha produtos */}
+            {showProducts && userProducts.length === 0 && (
+                <p className="mt-4 text-gray-600">Você ainda não adicionou produtos.</p>
+            )}
 
             {/* Botão para exibir o formulário de adicionar produto */}
             <button
@@ -131,8 +179,7 @@ const Profile = () => {
                             required
                         />
                     </div>
-
-                    <button type="submit" className="bg-green-600 text-white py-2 mt-4">
+                    <button type="submit" className="bg-green-600 text-white py-2">
                         Adicionar Produto
                     </button>
                 </form>
