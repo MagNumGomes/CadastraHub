@@ -4,12 +4,54 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum CategoryType {
+  customer
+  supplier
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  cpfCnpj   String   @unique
+  address   String
+  phone     String   @unique
+  products  Product[]
+  category  CategoryType
+  role      Role   @default(USER)
+}
+
+enum MaterialType {
+  ALUMINIO
+  COBRE
+  CHUMBO
+  MAGNESIO
+  NICKEL
+  INOX
+  LATAO
+  BRONZE
+  ZINCO
+}
+
+model Product {
+  id              Int           @id @default(autoincrement())
+  type            MaterialType
+  quantity_tonelada Decimal
+  userId            Int
+  user              User          @relation(fields: [userId], references: [id])
 }
