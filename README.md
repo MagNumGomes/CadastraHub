@@ -8,9 +8,9 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 
 ## 🛠️ Tecnologias Utilizadas
 
-| Backend | Frontend | Banco de Dados | Outras Tecnologias |
-|---------|---------|---------------|-------------------|
-| Node.js, Express, ORM (Prisma/Sequelize) | Javascript | MySQL | JWT (Autenticação) |
+| Backend             | Frontend                              | Banco de Dados | Outras Tecnologias |
+|---------------------|----------------------------------------|----------------|---------------------|
+| Node.js, Express, Prisma ORM | Vite, React.js, TailwindCSS, JavaScript | MySQL          | JWT (Autenticação), Axios, ESLint |
 
 ## 🎯 MVP (Minimum Viable Product)
 
@@ -20,17 +20,9 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 | Listagem e pesquisa de produtos |
 | Interface intuitiva e responsiva |
 
-## 📂 Repositórios
-
-| Projeto | Repositório |
-|---------|------------|
-| Backend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_back) |
-| Frontend | [Link para o repositório](#https://github.com/MagNumGomes/CadastraHub/tree/main/cadastrahub_front) |
-
 ## 👥 Equipe
 
 | 🔤 Nome | 🔗 GitHub | 🔗 LinkedIn |
 |---------|----------|------------|
 | João Vítor Góes | [GitHub](https://github.com/MagNumGomes) | [LinkedIn](https://www.linkedin.com/in/joaovitorgoes/) |
-| Alexandre de Souza | [GitHub](https://github.com/AlexandreFatec) | [LinkedIn]() |
-| Breno Augusto | [GitHub](https://github.com/brenoasj) | [LinkedIn]() |
+| Alexandre de Souza | [GitHub](https://github.com/AlexandreFatec) | [LinkedIn](https://www.linkedin.com/in/alexandre-ribeiro-b3b931111/) |
