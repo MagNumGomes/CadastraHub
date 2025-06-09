@@ -2,15 +2,17 @@ const prisma = require('../dbConnector');  // Certifique-se de que o prisma estÃ
 
 // Criar um novo produto (C)
 const createProduct = async (req, res) => {
-  const userId = parseInt(req.params.id); // Obtendo o ID do usuÃ¡rio da URL
-  const { type, quantity_tonelada } = req.body;
+  const userId = parseInt(req.params.id);
+  const { type, quantity_tonelada, subtypeAluminio, subtypeCobre } = req.body;
 
   try {
     const product = await prisma.product.create({
       data: {
         type,
         quantity_tonelada,
-        userId
+        userId,
+        subtypeAluminio: type === 'ALUMINIO' ? subtypeAluminio : null,
+        subtypeCobre: type === 'COBRE' ? subtypeCobre : null
       }
     });
 
@@ -20,6 +22,7 @@ const createProduct = async (req, res) => {
     res.status(500).json({ error: 'Falha ao adicionar produto' });
   }
 };
+
 
 
 const getUserProducts = async (req, res) => {

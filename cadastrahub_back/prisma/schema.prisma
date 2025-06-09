@@ -48,9 +48,42 @@ enum MaterialType {
   ZINCO
 }
 
+enum AluminioSubtype {
+  P1020
+  CABO
+  PERFIL_LIMPO
+  ESTAMPARIA_MOLE_MISTA
+  PANELA_LIMPA
+  RODA
+  CHAPA_SOLTA_PRENSADA
+  PISTAO
+  BLOCO_LIMPO_MISTO
+  LATA_SOLTA
+  LATA_PRENSADA
+  LIGA_SAE_305
+  LIGA_SAE_306
+  LIGA_SAE_309_323
+  DEOX
+  ZAMAC
+  TARUGO
+  PERFIL_NOVO
+  LAMINADOS
+  LAMINA_6MM
+  DISCO
+}
+
+enum CobreSubtype {
+  COBRE_1A
+  COBRE_MISTO
+  RADIADOR
+  AL_CU
+}
+
 model Product {
-  id              Int           @id @default(autoincrement())
-  type            MaterialType
+  id                Int           @id @default(autoincrement())
+  type              MaterialType
+  subtypeAluminio   AluminioSubtype? 
+  subtypeCobre      CobreSubtype?    
   quantity_tonelada Decimal
   userId            Int
   user              User          @relation(fields: [userId], references: [id])
