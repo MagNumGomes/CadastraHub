@@ -16,7 +16,52 @@ const createUser = async (req, res) => {
   } = req.body;
 
   try {
+
+    // Verificar se o telefone já existe
+    const existingPhone = await prisma.user.findUnique({
+      where: { phone }
+    });
+  
+    if (existingPhone) {
+      return res.status(409).json({ error: 'Phone already exists' }); // 409 Conflict
+    }
+
+    // Verificar se o telefone é valido
+    if (phone.length !== 11) {
+      return res.status(400).json({ error: 'Invalid phone' }); // 400 Bad Request
+    }
+
+    // Verificar se o CPF/CNPJ já existe
+    const existingCpfCnpj = await prisma.user.findUnique({
+      where: { cpfCnpj }
+    });
+  
+    if (existingCpfCnpj) {
+      return res.status(409).json({ error: 'CPF/CNPJ already exists' }); // 409 Conflict
+    }
+    
+    // Verificar se o CPF/CNPJ é valido
+    if (cpfCnpj.length !== 11 && cpfCnpj.length !== 14) {
+      return res.status(400).json({ error: 'Invalid CPF/CNPJ' }); // 400 Bad Request
+    }
+    
+    // Verificar se o email é valido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Invalid email' }); // 400 Bad Request
+    }
+
+    // Verifica se o email já existe
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already exists' }); // 409 Conflict
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
 
     const newUser = await prisma.user.create({
       data: {
