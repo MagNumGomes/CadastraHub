@@ -32,5 +32,4 @@ A empresa enfrentava dificuldades devido à **falta de uma plataforma de cadastr
 | 🔤 Nome | 🔗 GitHub | 🔗 LinkedIn |
 |---------|----------|------------|
 | João Vítor Góes | [GitHub](https://github.com/MagNumGomes) | [LinkedIn](https://www.linkedin.com/in/joaovitorgoes/) |
-| Alexandre de Souza | [GitHub](https://github.com/AlexandreFatec) | [LinkedIn]() |
-| Breno Augusto | [GitHub](https://github.com/brenoasj) | [LinkedIn]() |
+| Alexandre de Souza | [GitHub](https://github.com/AlexandreFatec) | [LinkedIn](https://www.linkedin.com/in/alexandredesouzaribeiro) |
