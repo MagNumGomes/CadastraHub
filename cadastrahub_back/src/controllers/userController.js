@@ -193,6 +193,62 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Get user by ID
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+      include: { products: true }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Failed to retrieve user' });
+  }
+};
+
+// Criar um admin
+const createAdmin = async (req, res) => {
+  const {
+    name,
+    email,
+    password,
+    cpfCnpj,
+    address,
+    phone,
+    category
+  } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newAdmin = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        cpfCnpj,
+        address,
+        phone,
+        category,
+        role: 'ADMIN'
+      }
+    });
+
+    res.status(201).json({ message: 'Admin criado com sucesso', user: newAdmin });
+  } catch (error) {
+    console.error('Create Admin Error:', error);
+    res.status(500).json({ error: 'Falha ao criar admin' });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -200,4 +256,6 @@ module.exports = {
   updateUser,
   deleteUser,
   loginUser,
+  getUserById,
+  createAdmin,
 };
