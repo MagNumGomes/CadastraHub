@@ -13,6 +13,7 @@
     "@prisma/client": "^6.6.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "cadastrohub_front": "file:../cadastrahub_front",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
