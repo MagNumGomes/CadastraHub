@@ -26,7 +26,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className="px-3 py-2 text-gray-700 hover:text-blue-600">
+              <Link to="/" className="px-3 py-2 text-gray-700 hover:text-blue-600">
                 Entrar
               </Link>
               <Link to="/register" className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">

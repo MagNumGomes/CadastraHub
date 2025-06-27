@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
@@ -12,7 +13,7 @@ function App() {
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route 
             path="/profile" 
@@ -20,8 +21,9 @@ function App() {
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
-            } 
+            }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Toaster position="top-right" />
