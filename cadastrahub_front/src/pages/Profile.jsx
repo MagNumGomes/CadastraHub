@@ -72,29 +72,29 @@ const Profile = () => {
   };
 
   const handleSaveAllProducts = async () => {
-  try {
-    setLoading(true);
-    const token = localStorage.getItem('token');
-    const response = await axios.post(
-      `http://localhost:3001/api/users/${user.id}/products/save-all`, // A URL precisa do ID do usuário
-      { products: productList }, // Envia os produtos para a API
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `http://localhost:3001/api/users/${user.id}/products/save-all`, // A URL precisa do ID do usuário
+        { products: productList }, // Envia os produtos para a API
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    toast.success('Produtos salvos com sucesso!');
-    console.log('Produtos salvos:', response.data);
+      toast.success('Produtos salvos com sucesso!');
+      console.log('Produtos salvos:', response.data);
 
-    fetchUserProducts();
+      fetchUserProducts();
 
-    // Após salvar, limpar o productList ou tomar outras ações
-    setProductList([]);
-  } catch (error) {
-    toast.error('Erro ao salvar produtos!');
-    console.error('Erro ao salvar produtos:', error);
-  } finally {
-    setLoading(false);
-  }
-};
+      // Após salvar, limpar o productList ou tomar outras ações
+      setProductList([]);
+    } catch (error) {
+      toast.error('Erro ao salvar produtos!');
+      console.error('Erro ao salvar produtos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
@@ -238,26 +238,26 @@ const Profile = () => {
                       >
                         <option value="">Selecione o subtipo</option>
                         <option value="P1020">P1020</option>
-                        <option value="Cabo">Cabo</option>
-                        <option value="Perfil limpo">Perfil limpo</option>
-                        <option value="Estamparia Mole Mista">Estamparia Mole Mista</option>
-                        <option value="Panela limpa">Panela limpa</option>
-                        <option value="Roda">Roda</option>
-                        <option value="Chapa solta/Prensada">Chapa solta/Prensada</option>
-                        <option value="Pistão">Pistão</option>
-                        <option value="Bloco limpo/misto">Bloco limpo/misto</option>
-                        <option value="Lata solta">Lata solta</option>
-                        <option value="Lata prensada">Lata prensada</option>
-                        <option value="Liga SAE 305">Liga SAE 305</option>
-                        <option value="Liga SAE 306">Liga SAE 306</option>
-                        <option value="Liga SAE 309/323">Liga SAE 309/323</option>
-                        <option value="Deox">Deox</option>
-                        <option value="Zamac">Zamac</option>
-                        <option value="Tarugo">Tarugo</option>
-                        <option value="Perfil novo">Perfil novo</option>
-                        <option value="Laminados">Laminados</option>
-                        <option value="Lâmina 6mm">Lâmina 6mm</option>
-                        <option value="Disco">Disco</option>
+                        <option value="CABO">CABO</option>
+                        <option value="PERFIL LIMPO">PERFIL LIMPO</option>
+                        <option value="ESTAMPARIA MOLE MISTA">ESTAMPARIA MOLE MISTA</option>
+                        <option value="PANELA LIMPA">PANELA LIMPA</option>
+                        <option value="RODA">RODA</option>
+                        <option value="CHAPA SOLTA/PRENSADA">CHAPA SOLTA/PRENSADA</option>
+                        <option value="PISTÃO">PISTÃO</option>
+                        <option value="BLOCO LIMPO/MISTO">BLOCO LIMPO/MISTO</option>
+                        <option value="LATA SOLTA">LATA SOLTA</option>
+                        <option value="LATA PRENSADA">LATA PRENSADA</option>
+                        <option value="LIGA SAE 305">LIGA SAE 305</option>
+                        <option value="LIGA SAE 306">LIGA SAE 306</option>
+                        <option value="LIGA SAE 309/323">LIGA SAE 309/323</option>
+                        <option value="DEOX">DEOX</option>
+                        <option value="ZAMAC">ZAMAC</option>
+                        <option value="TARUGO">TARUGO</option>
+                        <option value="PERFIL NOVO">PERFIL NOVO</option>
+                        <option value="LAMINADOS">LAMINADOS</option>
+                        <option value="LÂMINA 6MM">LÂMINA 6MM</option>
+                        <option value="DISCO">DISCO</option>
                       </select>
                     </div>
                   )}
@@ -280,10 +280,10 @@ const Profile = () => {
                         required
                       >
                         <option value="">Selecione o subtipo</option>
-                        <option value="COBRE_1A">Cobre 1a.</option>
-                        <option value="Cobre Misto">Cobre Misto</option>
-                        <option value="Radiador">Radiador</option>
-                        <option value="Al/Cu">Al/Cu</option>
+                        <option value="COBRE_1A">COBRE_1A</option>
+                        <option value="COBRE_MISTO">COBRE_MISTO</option>
+                        <option value="RADIADOR">RADIADOR</option>
+                        <option value="AL_CU">AL_CU</option>
                       </select>
                     </div>
                   )}
