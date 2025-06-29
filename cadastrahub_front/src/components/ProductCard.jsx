@@ -39,9 +39,13 @@ const ProductCard = ({ product, onDelete }) => {
                     <p className="text-sm text-gray-500">
                         Quantidade: <span className="font-semibold">{product.quantity_tonelada} TON</span>
                     </p>
+
+                    {/*
                     <p className="text-sm text-gray-500 mt-1">
                         Cadastrado em: {new Date(product.createdAt).toLocaleDateString()}
                     </p>
+                    */}
+                    
                 </div>
             </div>
             <div className="bg-gray-50 px-4 py-4 sm:px-6 flex justify-end">
