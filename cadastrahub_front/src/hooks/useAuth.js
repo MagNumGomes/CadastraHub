@@ -22,6 +22,7 @@ export const useAuth = () => {
         });
         setIsAuthenticated(true);
         setUser(response.data.user);
+      // eslint-disable-next-line no-unused-vars
       } catch (err) {
         localStorage.removeItem('token');
       } finally {
@@ -33,6 +34,7 @@ export const useAuth = () => {
   }, []);
 
   const login = async (email, password) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       const response = await axios.post('http://localhost:3001/api/users/login', { email, password });
       localStorage.setItem('token', response.data.token);
@@ -48,7 +50,7 @@ export const useAuth = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
     setUser(null);
-    navigate('/login');
+    navigate('/');
   };
 
   return { isAuthenticated, user, loading, login, logout };

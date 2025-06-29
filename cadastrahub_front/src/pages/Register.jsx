@@ -36,7 +36,7 @@ const Register = () => {
                 <div className="text-center">
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Criar uma conta</h2>
                     <p className="mt-2 text-sm text-gray-600">
-                        Já tem uma conta? <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">Faça login</Link>
+                        Já tem uma conta? <Link to="/" className="font-medium text-blue-600 hover:text-blue-500">Faça login</Link>
                     </p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
