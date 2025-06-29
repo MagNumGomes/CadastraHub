@@ -12,7 +12,7 @@ router.put('/:id', userControllers.updateUser);
 
 router.delete('/:id', userControllers.deleteUser);
 
-router.post('/', userControllers.loginUser);
+router.post('/login', userControllers.loginUser);
 
 router.get('/profile', authMiddleware, userControllers.getProfile);
 
