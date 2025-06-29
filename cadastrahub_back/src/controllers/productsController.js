@@ -113,11 +113,42 @@ const getProductById = async (req, res) => {
   }
 };
 
+// Salvar todos os produtos de uma vez
+const saveAllProducts = async (req, res) => {
+  const userId = parseInt(req.params.id); // Pega o userId da URL
+  const { products } = req.body; // Espera-se um array de produtos no corpo da requisição
+
+  if (!Array.isArray(products) || products.length === 0) {
+    return res.status(400).json({ error: 'A lista de produtos não pode estar vazia' });
+  }
+
+  try {
+    // Verifica se o userId foi enviado corretamente e associa ao produto
+    const productsWithUser = products.map(product => ({
+      ...product,
+      userId: userId, // Associando o userId a cada produto
+    }));
+
+    // Criação dos produtos no banco
+    const savedProducts = await prisma.product.createMany({
+      data: productsWithUser, // Passando os produtos com o userId
+    });
+
+    res.status(200).json({ message: 'Produtos salvos com sucesso', savedProducts });
+  } catch (error) {
+    console.error('Erro ao salvar os produtos:', error);
+    res.status(500).json({ error: 'Erro ao salvar produtos' });
+  }
+};
+
+
+
 module.exports = {
   createProduct,
   getUserProducts,
   getAllProducts,
   updateProduct,
   deleteProduct,
-  getProductById
+  getProductById,
+  saveAllProducts
 };

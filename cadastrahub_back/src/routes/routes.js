@@ -18,6 +18,8 @@ router.get('/profile', authMiddleware, userControllers.getProfile);
 
 router.post('/:id/products', productControllers.createProduct);
 
+router.post('/:id/products/save-all', productControllers.saveAllProducts);
+
 router.get('/:id/products', productControllers.getUserProducts);
 
 router.delete('/:id/products/:id', productControllers.deleteProduct);

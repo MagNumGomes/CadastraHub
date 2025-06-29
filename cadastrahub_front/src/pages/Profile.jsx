@@ -71,6 +71,31 @@ const Profile = () => {
     }
   };
 
+  const handleSaveAllProducts = async () => {
+  try {
+    setLoading(true);
+    const token = localStorage.getItem('token');
+    const response = await axios.post(
+      `http://localhost:3001/api/users/${user.id}/products/save-all`, // A URL precisa do ID do usuário
+      { products: productList }, // Envia os produtos para a API
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    toast.success('Produtos salvos com sucesso!');
+    console.log('Produtos salvos:', response.data);
+
+    fetchUserProducts();
+
+    // Após salvar, limpar o productList ou tomar outras ações
+    setProductList([]);
+  } catch (error) {
+    toast.error('Erro ao salvar produtos!');
+    console.error('Erro ao salvar produtos:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 
   const handleDeleteProduct = async (productId) => {
@@ -255,7 +280,7 @@ const Profile = () => {
                         required
                       >
                         <option value="">Selecione o subtipo</option>
-                        <option value="Cobre 1a.">Cobre 1a.</option>
+                        <option value="COBRE_1A">Cobre 1a.</option>
                         <option value="Cobre Misto">Cobre Misto</option>
                         <option value="Radiador">Radiador</option>
                         <option value="Al/Cu">Al/Cu</option>
@@ -297,8 +322,20 @@ const Profile = () => {
                   </button>
 
                   <button
-                    type="submit"
+                    type="button"
                     disabled={loading || productList.length === 0}
+
+                    onClick={() => {
+
+                      if (productList.length === 0) {
+                        toast.error('Adicione ao menos um produto');
+                        return;
+                      }
+
+
+                      handleSaveAllProducts();
+                    }}
+
                     className={`ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
                     {loading ? 'Salvando...' : 'Salvar todos'}
