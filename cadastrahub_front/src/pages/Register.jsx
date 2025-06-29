@@ -20,15 +20,27 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post('http://localhost:3001/api/users', formData);
-            toast.success('Cadastro realizado com sucesso!');
-            navigate('/login');
+          await axios.post('http://localhost:3001/api/users', formData);
+          toast.success('Cadastro realizado com sucesso!');
+          navigate('/');
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Erro ao registrar');
+          const error = err.response?.data?.error;
+      
+          const errorMessages = {
+            'Invalid phone': 'Telefone inválido. Use 11 dígitos, apenas números.',
+            'Phone already exists': 'Este telefone já está em uso.',
+            'Invalid CPF/CNPJ': 'CPF ou CNPJ inválido.',
+            'CPF/CNPJ already exists': 'CPF ou CNPJ já está em uso.',
+            'Invalid email': 'E-mail inválido.',
+            'Email already exists': 'Este e-mail já está cadastrado.'
+          };
+      
+          toast.error(errorMessages[error] || 'Erro ao registrar. Verifique os dados e tente novamente.');
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    };
+      };
+      
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
