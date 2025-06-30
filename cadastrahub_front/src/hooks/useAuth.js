@@ -37,9 +37,19 @@ export const useAuth = () => {
     // eslint-disable-next-line no-useless-catch
     try {
       const response = await axios.post('http://localhost:3001/api/users/login', { email, password });
+      console.log('LOGIN RESPONSE:', response.data.user);
       localStorage.setItem('token', response.data.token);
       setIsAuthenticated(true);
       setUser(response.data.user);
+
+      if (response.data.user.role === 'ADMIN') {
+        console.log('Redirecionando para admin...');
+        navigate('/admin');
+      } else {
+        console.log('Redirecionando para profile...');
+        navigate('/profile');
+      }
+
       return true;
     } catch (err) {
       throw err;

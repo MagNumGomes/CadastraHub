@@ -93,6 +93,13 @@ const loginUser = async (req, res) => {
     // Verifica se o usuário existe
     const user = await prisma.user.findUnique({
       where: { email },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        password: true // 👈 necessário para validar o login
+      }
     });
 
     if (!user) {
@@ -108,17 +115,28 @@ const loginUser = async (req, res) => {
 
     // Gera o token JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.json({ message: 'Login realizado com sucesso', token });
+    // Retorna token + dados essenciais do usuário para frontend (incluindo role)
+    res.json({ 
+      message: 'Login realizado com sucesso', 
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      }
+    });
   } catch (error) {
     console.error('Login Error:', error);
     res.status(500).json({ error: 'Erro ao fazer login' });
   }
-}; 
+};
+
 
 // Get all users (R)
 const getAllUsers = async (req, res) => {
@@ -142,6 +160,7 @@ const getProfile = async (req, res) => {
         id: true,
         name: true,
         email: true,
+        role: true,
       },
     });
 

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const [values, setValues] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
     const { login } = useAuth();
 
     const handleSubmit = async (e) => {
@@ -15,7 +14,6 @@ const Login = () => {
         try {
             await login(values.email, values.password);
             toast.success('Login realizado com sucesso!');
-            navigate('/profile');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Erro no login');
         } finally {
