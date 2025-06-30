@@ -1,14 +1,13 @@
 import React from 'react';
 import { useAuth } from '../hooks/useAuth';
+import UserList from '../components/UserList';
 
 const AdminDashboard = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <div className="p-8 text-center">Carregando...</div>;
   }
-
-  console.log('AdminDashboard user:', user);
 
   if (!user || user.role !== 'ADMIN') {
     return (
@@ -20,8 +19,10 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Painel do Administrador</h1>
-      <p>Bem-vindo, {user.name}! Esta é a página inicial do admin.</p>
+      <h1 className="text-2xl font-bold mb-2">Painel do Administrador</h1>
+      <p className="mb-8">Bem-vindo, <strong>{user.name}</strong>!</p>
+      
+      <UserList />
     </div>
   );
 };

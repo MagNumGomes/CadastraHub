@@ -141,16 +141,36 @@ const loginUser = async (req, res) => {
 // Get all users (R)
 const getAllUsers = async (req, res) => {
   try {
-    const users = await prisma.user.findMany(); // Fetch all users from the database
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const total = await prisma.user.count();
+    const users = await prisma.user.findMany({
+      skip,
+      take: limit,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        cpfCnpj: true,
+        phone: true,
+        address: true,
+      }
+    });
+
     res.json({
       message: 'Users retrieved successfully',
-      users: users
+      users,
+      total
     });
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).json({ error: 'Failed to retrieve users' });
   }
 };
+
 
 const getProfile = async (req, res) => {
   try {
