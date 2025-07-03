@@ -13,7 +13,7 @@ const AdminDashboard = () => {
         const fetchData = async () => {
             try {
                 // Assumindo que o endpoint /users retorna todos os usuários para o admin
-                const response = await api.get('/users');
+                const response = await api.get('/admin/users');
                 const allUsers = response.data;
                 setUsers(allUsers);
 
