@@ -36,8 +36,8 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', token);
       setUser(user);
       setIsAuthenticated(true);
-      
-      navigate(user.role === 'admin' ? '/directory' : '/profile');
+      console.log("User role:", user.role);
+      navigate(user.role === 'ADMIN' ? '/directory' : '/profile');
       return true;
     } catch (err) {
       toast.error(err.response?.data?.message || 'Falha no login');

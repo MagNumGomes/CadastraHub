@@ -4,6 +4,9 @@ const userControllers = require('../controllers/userController');
 const productControllers = require('../controllers/productsController');
 const adminAuth = require('../middlewares/adminAuth');
 
+// Adicione esta rota para criar um admin (sem middleware para o primeiro admin)
+router.post('/register', userControllers.createAdmin);
+
 // Protect all admin routes
 router.use(adminAuth);
 
@@ -19,8 +22,5 @@ router.post('/products', productControllers.createProduct);
 router.put('/products/:id', productControllers.updateProduct);
 router.delete('/products/:id', productControllers.deleteProduct);
 router.get('/products/:id', productControllers.getProductById);
-
-// Adicione esta rota para criar um admin (sem middleware para o primeiro admin)
-router.post('/register', userControllers.createAdmin);
 
 module.exports = router;

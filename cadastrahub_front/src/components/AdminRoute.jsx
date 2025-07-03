@@ -13,7 +13,7 @@ const AdminRoute = ({ children }) => {
     
     // IMPORTANTE: A lógica de role deve corresponder ao que seu backend retorna.
     // Pode ser user.role, user.isAdmin, user.category, etc.
-    if (!isAuthenticated || user?.role !== 'admin') {
+    if (!isAuthenticated || user?.role !== 'ADMIN') {
         // Redireciona para a home se não for admin
         return <Navigate to="/" state={{ from: location }} replace />;
     }
