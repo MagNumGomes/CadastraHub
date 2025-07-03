@@ -1,19 +1,18 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import LoadingSpinner from './common/LoadingSpinner';
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();
-    const navigate = useNavigate();
+    const location = useLocation();
 
-    useEffect(() => {
-        if (!loading && !isAuthenticated) {
-            navigate('/login');
-        }
-    }, [isAuthenticated, loading, navigate]);
+    if (loading) {
+        return <LoadingSpinner />;
+    }
 
-    if (loading || !isAuthenticated) {
-        return <div className="text-center py-8">Carregando...</div>;
+    if (!isAuthenticated) {
+        // Redireciona para o login, guardando a página que o usuário tentou acessar
+        return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     return children;
