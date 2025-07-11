@@ -98,11 +98,46 @@ const getProductById = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  const { type, subtypeAluminio, subtypeCobre } = req.query;
+
+  try {
+    const filters = {};
+
+    if (type) filters.type = type;
+    if (subtypeAluminio) filters.subtypeAluminio = subtypeAluminio;
+    if (subtypeCobre) filters.subtypeCobre = subtypeCobre;
+
+    const products = await prisma.product.findMany({
+      where: filters,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+
+    res.json(products);
+  } catch (error) {
+    console.error('Erro ao buscar produtos:', error);
+    res.status(500).json({ message: 'Erro ao buscar produtos.' });
+  }
+};
+
+
 module.exports = {
   createProduct,
   getUserProducts,
   getAllProducts,
   deleteProduct,
   updateProduct,    
-  getProductById,   
+  getProductById, 
+  searchProducts,  
 };

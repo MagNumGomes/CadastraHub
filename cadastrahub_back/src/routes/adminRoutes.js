@@ -19,6 +19,10 @@ router.delete('/users/:id', userControllers.deleteUser);
 // Admin user search
 router.get('/usuarios/buscar', userControllers.searchUsers);
 
+// Admin product search
+router.get('/products/search', productControllers.searchProducts);
+
+
 // Admin product management
 router.get('/products', productControllers.getAllProducts);
 router.post('/products', productControllers.createProduct);
