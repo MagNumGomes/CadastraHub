@@ -16,6 +16,9 @@ router.get('/users/:id', userControllers.getUserById);
 router.put('/users/:id', userControllers.updateUser);
 router.delete('/users/:id', userControllers.deleteUser);
 
+// Admin user search
+router.get('/usuarios/buscar', userControllers.searchUsers);
+
 // Admin product management
 router.get('/products', productControllers.getAllProducts);
 router.post('/products', productControllers.createProduct);

@@ -174,6 +174,46 @@ const createAdmin = async (req, res) => {
   }
 };
 
+// Buscar usuários por nome, CPF, cidade (ou qualquer campo)
+const searchUsers = async (req, res) => {
+  // Pegando todos os possíveis filtros da URL
+  const { name, email, cpfCnpj, address, phone, category } = req.query;
+
+  try {
+    // Monta um objeto de filtros só com os campos que foram enviados
+    const filters = {};
+
+    if (name) filters.name = name;
+    if (email) filters.email = email;
+    if (cpfCnpj) filters.cpfCnpj = cpfCnpj;
+    if (address) filters.address = address;
+    if (phone) filters.phone = phone;
+    if (category) filters.category = category;
+
+    // Consulta no banco com base nos filtros
+    const users = await prisma.user.findMany({
+      where: filters,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        cpfCnpj: true,
+        address: true,
+        phone: true,
+        category: true,
+        role: true,
+        createdAt: true
+      }
+    });
+
+    res.json(users);
+  } catch (error) {
+    console.error('Erro na busca de usuários:', error);
+    res.status(500).json({ message: 'Erro ao buscar usuários.' });
+  }
+};
+
+
 // Exporta todas as funções, incluindo a nova createAdmin
 module.exports = {
   createUser,
@@ -184,4 +224,5 @@ module.exports = {
   updateUser,
   deleteUser,
   createAdmin, // Adicionado
+  searchUsers,
 };
