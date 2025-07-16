@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api/axios';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { toast } from 'react-hot-toast';
 
 const AdminDashboard = () => {
-    const [users, setUsers] = useState([]);
     const [stats, setStats] = useState({ clients: 0, suppliers: 0 });
     const [inactiveUsers, setInactiveUsers] = useState({ '6m': [], '1y': [], '2y': [], '5y': [] });
     const [loading, setLoading] = useState(true);
@@ -12,35 +12,11 @@ const AdminDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Assumindo que o endpoint /users retorna todos os usuários para o admin
-                const response = await api.get('/admin/users');
-                const allUsers = response.data;
-                setUsers(allUsers);
-
-                // Calcular estatísticas
-                const clients = allUsers.filter(u => u.category === 'customer').length;
-                const suppliers = allUsers.filter(u => u.category === 'supplier').length;
-                setStats({ clients, suppliers });
-
-                // Calcular inatividade
-                // IMPORTANTE: Usamos 'updatedAt' como um proxy para "último acesso",
-                // já que não podemos alterar o backend para ter 'lastLogin'.
-                const now = new Date();
-                const periods = {
-                    '6m': 6, '1y': 12, '2y': 24, '5y': 60
-                };
-                const inactive = { '6m': [], '1y': [], '2y': [], '5y': [] };
-
-                allUsers.forEach(user => {
-                    const lastUpdate = new Date(user.updatedAt);
-                    const diffMonths = (now.getFullYear() - lastUpdate.getFullYear()) * 12 + (now.getMonth() - lastUpdate.getMonth());
-                    
-                    if (diffMonths >= periods['5y']) inactive['5y'].push(user);
-                    else if (diffMonths >= periods['2y']) inactive['2y'].push(user);
-                    else if (diffMonths >= periods['1y']) inactive['1y'].push(user);
-                    else if (diffMonths >= periods['6m']) inactive['6m'].push(user);
-                });
-                setInactiveUsers(inactive);
+                const response = await api.get('/admin/dashboard-stats');
+                const { stats, inactiveUsers } = response.data;
+                
+                setStats(stats);
+                setInactiveUsers(inactiveUsers);
 
             } catch (error) {
                 console.error("Erro ao buscar dados do admin:", error);
@@ -82,10 +58,18 @@ const AdminDashboard = () => {
         </div>
     );
 
-
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Dashboard do Administrador</h1>
+            {/* --- CABEÇALHO COM BOTÃO ADICIONADO --- */}
+            <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+                <h1 className="text-3xl font-bold text-gray-800">Dashboard do Administrador</h1>
+                <Link 
+                    to="/directory" 
+                    className="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-300"
+                >
+                    Acessar Diretório de Usuários
+                </Link>
+            </div>
             
             {/* Estatísticas Gerais */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

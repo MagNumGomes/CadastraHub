@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       setIsAuthenticated(true);
       console.log("User role:", user.role);
-      navigate(user.role === 'ADMIN' ? '/directory' : '/profile');
+      navigate(user.role === 'ADMIN' ? '/admin' : '/profile');
       return true;
     } catch (err) {
       toast.error(err.response?.data?.message || 'Falha no login');

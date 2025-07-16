@@ -61,7 +61,7 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-// ATUALIZAR UM PRODUTO (FUNÇÃO ADICIONADA)
+// ATUALIZAR UM PRODUTO
 const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { type, quantity_tonelada } = req.body;
@@ -80,7 +80,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// BUSCAR PRODUTO POR ID (FUNÇÃO ADICIONADA)
+// BUSCAR PRODUTO POR ID
 const getProductById = async (req, res) => {
   const { id } = req.params;
   try {

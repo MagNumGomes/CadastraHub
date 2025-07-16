@@ -32,7 +32,7 @@ model User {
   role      Role         @default(USER)
   products  Product[]
   createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  updatedAt DateTime     @default(now()) @updatedAt
 }
 
 enum MaterialType {
@@ -79,12 +79,12 @@ enum CobreSubtype {
 }
 
 model Product {
-  id                Int          @id @default(autoincrement())
+  id                Int              @id @default(autoincrement())
   type              MaterialType
   subtypeAluminio   AluminioSubtype?
   subtypeCobre      CobreSubtype?
   quantity_tonelada Decimal
   userId            Int
-  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt         DateTime     @default(now())
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime         @default(now())
 }

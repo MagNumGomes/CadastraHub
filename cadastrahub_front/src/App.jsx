@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Insights from "./pages/Insights";
 import AdminDashboard from "./pages/AdminDashboard";
 import DirectoryPage from "./pages/DirectoryPage";
+import EditUserPage from "./pages/EditUserPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
@@ -32,6 +33,16 @@ function App() {
           {/* Rotas Protegidas para Admin */}
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
           <Route path="/directory" element={<AdminRoute><DirectoryPage /></AdminRoute>} />
+          
+          {/* Nova rota de edição do admin */}
+          <Route 
+            path="/admin/users/:id/edit" 
+            element={
+              <AdminRoute>
+                <EditUserPage />
+              </AdminRoute>
+            } 
+          />
           
           {/* Rota de Fallback */}
           <Route path="*" element={<NotFound />} />

@@ -21,9 +21,8 @@ const Login = () => {
         }
     };
 
-    // Função para preencher os dados de admin para teste rápido
     const handleAdminLoginClick = () => {
-        // ATENÇÃO: Use credenciais de admin que existam no seu banco de dados
+        // ATENÇÃO: Use credenciais de admin que existam no seu banco de dados (teste rápido)
         setValues({
             email: 'admin@cadastrahub.com',
             password: 'admin123'

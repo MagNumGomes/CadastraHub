@@ -1,13 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-// A biblioteca 'cors' não será mais usada nesta abordagem
 // const cors = require('cors'); 
 const mainRoutes = require('./src/routes/routes');
 const adminRoutes = require('./src/routes/adminRoutes');
 
 const app = express();
 
-// --- INÍCIO DA MUDANÇA: Middleware de CORS Manual ---
+// --- Middleware de CORS Manual ---
 
 // Este middleware será executado em TODAS as requisições
 app.use((req, res, next) => {
@@ -30,18 +29,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- FIM DA MUDANÇA ---
-
-
 // Middleware para interpretar o corpo das requisições como JSON.
 app.use(express.json());
 
-
-// --- SUAS ROTAS (permanecem as mesmas) ---
 app.use('/api', mainRoutes);
 app.use('/api/admin', adminRoutes);
 
-
-// --- INICIALIZAÇÃO DO SERVIDOR ---
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
